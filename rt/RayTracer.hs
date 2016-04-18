@@ -1,17 +1,35 @@
-module RayTracer (trace) where
+module RayTracer (render, createRay) where
 
 import Camera
 import Geometry
-import Scene (Scene)
+import Scene
 import Vector
 
-render :: [Pixel] -> Camera -> Scene -> [Maybe Double]
-render [] _ _ = []
-render (p:px) cam scene = trace (createRay cam p) scene : (render px cam scene)
+import Data.Maybe
 
-trace :: Ray -> Scene -> Maybe Double
-trace ray []     = Nothing
-trace ray (x:xs) = min (intersect ray x) (trace ray xs)
+data Result = Result { shape :: Shape
+                     , distance :: Double }
+
+render :: Camera -> Scene -> [Maybe Double]
+render cam scene = map (fmap distance) results
+    where
+      results = map (trace (geometry scene)) rays
+      rays = map (createRay cam) pixels
+      pixels = pixelBuffer cam
+
+minResult :: Maybe Result -> Maybe Result -> Maybe Result
+minResult Nothing Nothing = Nothing
+minResult a Nothing = a
+minResult Nothing b = b
+minResult (Just a) (Just b)
+  | distance a < distance b = Just a
+  | otherwise = Just b
+
+trace :: [Shape] -> Ray -> Maybe Result
+trace [] _       = Nothing
+trace (x:xs) ray = minResult (fmap (Result x) t) rest
+    where t = intersect ray x
+          rest = trace xs ray
 
 createRay :: Camera -> Pixel -> Ray
-createRay cam p = Ray (eye cam) (pixelAsPoint cam p `sub` eye cam)
+createRay cam p = Ray (eye cam) (unit $ pixelAsPoint cam p `sub` eye cam)

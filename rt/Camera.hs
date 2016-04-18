@@ -1,8 +1,14 @@
-module Camera (Camera(eye), Pixel, pixelAsPoint) where
+module Camera (Camera(..), Pixel, pixelBuffer, pixelAsPoint) where
 
 import Vector
 
 type Pixel = (Int, Int)
+
+pixelBuffer :: Camera -> [Pixel]
+pixelBuffer camera = [(x, y) | y <- [0..h], x <- [0..w] ]
+  where
+    h = height camera
+    w = width camera
 
 data Camera = Camera {
   eye :: Vector,

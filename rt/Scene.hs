@@ -1,5 +1,5 @@
-module Scene (Scene) where
+module Scene (Scene(..)) where
 
 import Geometry (Shape)
 
-type Scene = [Shape]
+data Scene = Scene { geometry :: [Shape] } deriving (Show)
