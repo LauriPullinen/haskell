@@ -1,10 +1,11 @@
 module Main (main) where
 
-import RayTracer
-import Vector
 import Camera
 import Geometry
+import Image
+import RayTracer
 import Scene
+import Vector
 
 main = putStrLn $ show image
   where
