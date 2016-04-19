@@ -1,4 +1,4 @@
-module Vector (Vector(..), len, dot, add, sub, mult, div, unit) where
+module Vector (Vector(..), len, dot, add, sub, mult, div, unit, toIntegrals) where
 
 import Prelude hiding (div)
 
@@ -17,7 +17,7 @@ add (Vector3 x y z) (Vector3 a b c) = Vector3 (x+a) (y+b) (z+c)
 sub :: Vector -> Vector -> Vector
 sub a b = add a (neg b)
 
-mult :: Vector ->Double ->  Vector
+mult :: Vector -> Double ->  Vector
 mult (Vector3 x y z) m = Vector3 (x*m) (y*m) (z*m)
 
 neg :: Vector -> Vector
@@ -30,5 +30,5 @@ unit :: Vector -> Vector
 unit v = v `div` (len v)
 
 toIntegrals :: (Integral a) => Vector -> [a]
-toIntegrals (Vector3 x y z) = map round [x, y, z]
+toIntegrals (Vector3 x y z) = map round [x, y, z, 1]
 toIntegrals (Vector4 x y z w) = map round [x, y, z, w]

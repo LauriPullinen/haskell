@@ -27,7 +27,7 @@ pixelAsPoint cam (i, j) = mult (right cam) pixelX `add`
   dir cam
     where
       pixelX = (2 * ndcX - 1) * t * aspectRatio
-      pixelY = (2 * ndcY - 1) * t -- wrong way around?
+      pixelY = (2 * ndcY - 1) * t
       ndcX = (fromIntegral i + 0.5) / fromIntegral (width cam)
       ndcY = (fromIntegral j + 0.5) / fromIntegral (height cam)
       aspectRatio = fromIntegral (width cam) / fromIntegral (height cam)

@@ -3,11 +3,12 @@ module Main (main) where
 import Camera
 import Geometry
 import Image
+import Light
 import RayTracer
 import Scene
 import Vector
 
-main = writeFloating "image.bmp" w h $ concatMap (replicate 4) image
+main = write "image.bmp" w h $ concatMap toIntegrals image
   where
     image = render camera scene
     rays = map (createRay camera) buffer
@@ -21,6 +22,8 @@ main = writeFloating "image.bmp" w h $ concatMap (replicate 4) image
       height = h,
       fov = 90.0
     }
-    scene = Scene [Sphere (Vector3 0 0 0) 3]
-    w = 800
+    scene = Scene
+      [Sphere (Vector3 0 0 0) 2]
+      [PointLight (Vector3 0 0 8) (Vector3 255 255 255) 60.0]
+    w = 600
     h = 600
