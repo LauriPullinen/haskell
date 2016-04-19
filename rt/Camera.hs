@@ -18,7 +18,7 @@ data Camera = Camera {
   width :: Int,
   height :: Int,
   fov :: Double
-} deriving (Show)
+} deriving (Read, Show)
 
 pixelAsPoint :: Camera -> Pixel -> Vector
 pixelAsPoint cam (i, j) = mult (right cam) pixelX `add`

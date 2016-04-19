@@ -4,7 +4,7 @@ import Vector
 
 data Ray = Ray { origin::Vector, direction::Vector } deriving (Show)
 
-data Shape = Sphere Vector Double deriving (Show)
+data Shape = Sphere Vector Double deriving (Read, Show)
 
 intersect :: Ray -> Shape -> Maybe Double
 intersect (Ray rO rD) (Sphere sO sR)

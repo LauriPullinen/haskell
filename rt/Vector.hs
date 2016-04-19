@@ -3,7 +3,7 @@ module Vector (Vector(..), len, dot, add, sub, mult, div, unit, toIntegrals) whe
 import Prelude hiding (div)
 
 data Vector = Vector3 Double Double Double |
-  Vector4 Double Double Double Double deriving (Show)
+  Vector4 Double Double Double Double deriving (Read, Show)
 
 len :: Vector -> Double
 len (Vector3 x y z) = sqrt (x**2 + y**2 + z**2)
