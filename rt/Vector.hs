@@ -28,3 +28,7 @@ div v a = v `mult` (recip a)
 
 unit :: Vector -> Vector
 unit v = v `div` (len v)
+
+toIntegrals :: (Integral a) => Vector -> [a]
+toIntegrals (Vector3 x y z) = map round [x, y, z]
+toIntegrals (Vector4 x y z w) = map round [x, y, z, w]

@@ -10,9 +10,10 @@ import Data.Maybe
 data Result = Result { shape :: Shape
                      , distance :: Double }
 
-render :: Camera -> Scene -> [Maybe Double]
-render cam scene = map (fmap distance) results
+render :: Camera -> Scene -> [Double]
+render cam scene = map (fromMaybe 0) distances
     where
+      distances = map (fmap ((*50) . distance)) results
       results = map (trace (geometry scene)) rays
       rays = map (createRay cam) pixels
       pixels = pixelBuffer cam
