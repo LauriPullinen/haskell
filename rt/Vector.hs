@@ -37,7 +37,7 @@ toByte :: (Integral a) => Double -> a
 toByte x
   | x >= 1.0  = 255
   | x <= 0.0  = 0
-  | otherwise = round (x * 256)
+  | otherwise = round (x * 255)
 
 -- component-wise product of vectors
 hadamardProd :: Vector -> Vector -> Vector
