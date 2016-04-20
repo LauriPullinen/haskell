@@ -1,4 +1,4 @@
-module Vector (Vector(..), len, dot, add, sub, mult, div, unit, toIntegrals) where
+module Vector (Vector(..), len, dot, add, sub, mult, div, unit, toBytes, hadamardProd) where
 
 import Prelude hiding (div)
 
@@ -29,6 +29,16 @@ div v a = v `mult` (recip a)
 unit :: Vector -> Vector
 unit v = v `div` (len v)
 
-toIntegrals :: (Integral a) => Vector -> [a]
-toIntegrals (Vector3 x y z) = map round [x, y, z, 1]
-toIntegrals (Vector4 x y z w) = map round [x, y, z, w]
+toBytes :: (Integral a) => Vector -> [a]
+toBytes (Vector3 x y z) = map toByte [x, y, z, 1]
+toBytes (Vector4 x y z w) = map toByte [x, y, z, w]
+
+toByte :: (Integral a) => Double -> a
+toByte x
+  | x >= 1.0  = 255
+  | x <= 0.0  = 0
+  | otherwise = round (x * 256)
+
+-- component-wise product of vectors
+hadamardProd :: Vector -> Vector -> Vector
+hadamardProd (Vector3 x y z) (Vector3 a b c) = Vector3 (x*a) (y*b) (z*c)

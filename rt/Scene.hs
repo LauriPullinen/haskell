@@ -1,9 +1,9 @@
 module Scene (Scene(..)) where
 
-import Geometry (Shape)
+import Object
 import Light
 
 data Scene = Scene {
-  geometry :: [Shape],
+  geometry :: [Object],
   lights :: [Light]
 } deriving (Read, Show)

@@ -15,4 +15,4 @@ main = readFile "conf/camera.conf" >>= \ cameraFile ->
            image = render camera scene
            rays = map (createRay camera) buffer
            buffer = pixelBuffer camera
-       in write "image.bmp" (width camera) (height camera) $ concatMap toIntegrals image
+       in write "image.bmp" (width camera) (height camera) $ concatMap toBytes image
