@@ -4,6 +4,7 @@ import Camera
 import Geometry
 import Light
 import Material
+import Math
 import Object
 import Scene
 import Vector
@@ -58,7 +59,7 @@ shade scene (Just result) = if obstructed
     lightDir = unit impactToLight
     impactToLight = point light `sub` impact
     normal = getNormal (shape $ object result) impact
-    impact = origin ray `add` (direction ray `mult` distance result) `sub` (direction ray `mult` 1e-8)
+    impact = origin ray `add` (direction ray `mult` distance result) `sub` (direction ray `mult` epsilon)
     light = head $ lights scene -- TODO: Random light
     ray = traced result
     objectColor = Material.color $ material $ object result

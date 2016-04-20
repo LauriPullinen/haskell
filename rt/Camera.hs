@@ -32,5 +32,3 @@ pixelAsPoint cam (i, j) = mult (right cam) pixelX `add`
       ndcY = (fromIntegral j + 0.5) / fromIntegral (height cam)
       aspectRatio = fromIntegral (width cam) / fromIntegral (height cam)
       t = tan (fov cam / 2 * pi / 180)
-    --  nI = fromIntegral i / fromIntegral (width cam) - 0.5
-    --  nJ = fromIntegral j / fromIntegral (height cam) - 0.5

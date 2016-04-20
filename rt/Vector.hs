@@ -1,4 +1,4 @@
-module Vector (Vector(..), len, dot, add, sub, mult, div, unit, toBytes, hadamardProd) where
+module Vector (Vector(..), len, dot, add, sub, mult, div, unit, cross, toBytes, hadamardProd) where
 
 import Prelude hiding (div)
 
@@ -28,6 +28,9 @@ div v a = v `mult` (recip a)
 
 unit :: Vector -> Vector
 unit v = v `div` (len v)
+
+cross :: Vector -> Vector -> Vector
+cross (Vector3 x y z) (Vector3 a b c) = Vector3 (y*c - z*b) (z*a - x*c) (x*b - y*a)
 
 toBytes :: (Integral a) => Vector -> [a]
 toBytes (Vector3 x y z) = map toByte [x, y, z, 1]
