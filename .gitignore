@@ -4,5 +4,6 @@ cabal-dev
 *.exe
 *.hi
 *.swp
+*.bmp
 .cabal-sandbox/
 cabal.sandbox.config
