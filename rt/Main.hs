@@ -5,6 +5,7 @@ import Geometry
 import Image
 import Light
 import RayTracer
+import Renderer
 import Scene
 import Vector
 
