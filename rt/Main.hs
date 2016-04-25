@@ -11,9 +11,9 @@ import Vector
 
 main = readFile "conf/camera.conf" >>= \ cameraFile ->
        readFile "conf/scene.conf" >>= \ sceneFile ->
+       readFile "conf/renderer.conf" >>= \ rendererFile ->
        let camera = read cameraFile :: Camera
            scene = read sceneFile :: Scene
-           image = render camera scene
-           rays = map (createRay camera) buffer
-           buffer = pixelBuffer camera
+           renderer = read rendererFile :: Renderer
+           image = render renderer camera scene
        in write "image.bmp" (width camera) (height camera) $ concatMap toBytes image

@@ -1,15 +1,14 @@
-module Renderer (render) where
+module Renderer (Renderer(..), render) where
 
 import Camera
 import Geometry
+import PathTracer
 import RayTracer
 import Scene
 import Shader
 import Vector
 
-render :: Camera -> Scene -> [Vector]
-render cam scene = map (shade scene) results
-    where
-      results = map (trace (geometry scene)) rays
-      rays = map (createRay cam) pixels
-      pixels = pixelBuffer cam
+data Renderer = PathTracer { depth :: Int } deriving (Read, Show)
+
+render :: Renderer -> Camera -> Scene -> [Vector]
+render (PathTracer depth) cam scene = renderPathTracing cam scene depth
