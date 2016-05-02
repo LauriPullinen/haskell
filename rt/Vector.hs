@@ -1,4 +1,4 @@
-module Vector (Vector(..), len, dot, add, sub, mult, neg, div, unit, cross, toBytes, hadamardProd) where
+module Vector (Vector(..), len, dot, add, sub, mult, pow, neg, div, unit, cross, toBytes, hadamardProd) where
 
 import Prelude hiding (div)
 
@@ -19,6 +19,9 @@ sub a b = add a (neg b)
 
 mult :: Vector -> Double ->  Vector
 mult (Vector3 x y z) m = Vector3 (x*m) (y*m) (z*m)
+
+pow :: Vector -> Double -> Vector
+pow (Vector3 x y z) e = Vector3 (x**e) (y**e) (z**e)
 
 neg :: Vector -> Vector
 neg = (`mult` (-1))
