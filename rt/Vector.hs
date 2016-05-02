@@ -1,4 +1,4 @@
-module Vector (Vector(..), len, dot, add, sub, mult, div, unit, cross, toBytes, hadamardProd) where
+module Vector (Vector(..), len, dot, add, sub, mult, neg, div, unit, cross, toBytes, hadamardProd) where
 
 import Prelude hiding (div)
 
@@ -6,7 +6,7 @@ data Vector = Vector3 Double Double Double |
   Vector4 Double Double Double Double deriving (Read, Show)
 
 len :: Vector -> Double
-len (Vector3 x y z) = sqrt (x**2 + y**2 + z**2)
+len (Vector3 x y z) = sqrt (x^2 + y^2 + z^2)
 
 dot :: Vector -> Vector -> Double
 dot (Vector3 x y z) (Vector3 a b c) = x*a + y*b + z*c

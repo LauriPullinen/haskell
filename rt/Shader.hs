@@ -20,9 +20,8 @@ shade _ Nothing = Vector3 0 0 0
 shade scene (Just result) = if obstructed
   then Vector3 0 0 0
   else Light.color light `hadamardProd`
-    objectColor `mult`
-    power light `mult`
-    abs (dot normal lightDir) `div`
+    brdf objectMaterial normal lightDir (neg $ direction ray) `mult`
+    power light `div`
     (lightDistance ^ 2)
   where
     obstructed = fromMaybe False $ (< lightDistance) <$> obstructionDistance
@@ -36,4 +35,4 @@ shade scene (Just result) = if obstructed
     impact = getImpact result
     light = head $ lights scene -- TODO: Random light
     ray = traced result
-    objectColor = Material.color $ material $ object result
+    objectMaterial = material $ object result
